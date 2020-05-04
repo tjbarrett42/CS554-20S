@@ -1,9 +1,7 @@
-const postRoutes = require("./posts");
-const userRoutes = require("./users");
+const taskRoutes = require("./api");
 
 const constructorMethod = app => {
-  app.use("/posts", postRoutes);
-  app.use("/users", userRoutes);
+  app.use("/api", taskRoutes);
 
   app.use("*", (req, res) => {
     res.status(404).json({ error: "Not found" });
