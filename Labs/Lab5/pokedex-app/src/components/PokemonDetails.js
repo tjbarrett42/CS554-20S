@@ -18,9 +18,8 @@ export default class PokemonDetails extends Component {
 
     async componentDidMount() {
         const { id } = this.props.match.params;
-        const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+        this.setState({id: id}, () => {this.showDetails()});
 
-        this.setState({data: res.data});
 
 
         // const name = res.data.name;
@@ -35,15 +34,22 @@ export default class PokemonDetails extends Component {
         // this.setState({type: type.type.name});
 
     }
+
+    async showDetails(){
+        const id = this.state.id;
+        const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+        this.setState({data: res.data});
+    }
+
     render() {
-        const type = this.state.data.types.map(types => { return <li> key={types.type.name}>{types.type.name} </li> });
+        // const type = this.state.data.types.map(types => { return <li> key={types.type.name}>{types.type.name} </li> });
         return (
             <div>
                 {/* Ensure this.state.data exists*/}
                 <h2>{this.state.data && this.state.data.id}: {this.state.data.name}</h2>
                 <h3>Types:</h3>
                 <ul>
-                    {type}
+                    {/*{type}*/}
                 </ul>
 
             </div>

@@ -3,14 +3,12 @@ import Axios from 'axios';
 import { Button } from 'react-bootstrap';
 
 import PokemonDisplay from './PokemonDisplay';
-import ReactPaginate from 'react-paginate';
-
-
 
 class Pokemon extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            data: '',
             page: 0
 
         };
@@ -20,8 +18,6 @@ class Pokemon extends Component {
 
 
     async componentDidMount() {
-        //
-
         const { page } = this.props.match.params;
         this.setState({page: page}, () => {this.listPokemon()});
 
@@ -32,45 +28,39 @@ class Pokemon extends Component {
         // Data had next/prev urls with different offsets by 20 pokemon, change manually for each call
         const page = this.state.page;
         let offset = page * 20;
-        const pokemonUrl = await Axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}`);
-        this.setState({pokemon: pokemonUrl.data['results']});
+        const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}`);
+        this.setState({data: res.data});
     }
 
     next(){
         let nextPage = Number(this.state.page + 1);
-        this.setState({page: nextPage}); //breaks render!?
-        this.listPokemon();
+        this.setState({page: nextPage}, () => {this.listPokemon()});
     }
 
     prev(){
         let prevPage = Number(this.state.page - 1);
-        this.setState({page: prevPage}); //breaks render!?
-        this.listPokemon();
+        this.setState({page: prevPage}, () => {this.listPokemon()});
     }
 
     render() {
-
-
         return (
+            // Keep HTML valid with fragments, since we are returning multiple values
             <React.Fragment>
                 <div>
                     <Button variant="primary" size="sm" onClick={this.prev}>Prev</Button>
                     <Button variant="primary" size="sm" onClick={this.next}>Next</Button>
                 </div>
 
-                {this.state.pokemon ? (
-                    <div className="row">
-                    {this.state.pokemon.map(pokemon => (
-                        <PokemonDisplay
-                            key={pokemon.name}
-                            name={pokemon.name}
-                            url={pokemon.url}
-                        />
-                    ))}
-                    </div>
-                ) : (
-                    <h1>Loading pokemon</h1>
-                )}
+                <div className="row">
+                {this.state.data && this.state.data['results'].map(pokemon => (
+                    <PokemonDisplay
+                        key={pokemon.name}
+                        name={pokemon.name}
+                        url={pokemon.url}
+                    />
+                ))}
+                </div>
+
             </React.Fragment>
         );
     }

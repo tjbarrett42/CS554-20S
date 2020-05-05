@@ -20,9 +20,6 @@ export default function App() {
                             <Link to="/pokemon/page/0">The Pokemon Listing</Link>
                         </li>
                         <li>
-                            <Link to="/pokemon/1">Pokemon Details</Link>
-                        </li>
-                        <li>
                             <Link to="/berries/page/0">The Berry Listing</Link>
                         </li>
                         <li>
