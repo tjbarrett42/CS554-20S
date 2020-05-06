@@ -19,12 +19,11 @@ export default class PokemonDisplay extends Component {
         this.setState({name: name, id: id});
 
     }
-
     render() {
         const detailLink = '/pokemon/' + this.state.id;
         return (
             <div>
-                <Link to={detailLink}><h3>{this.state.id}: {this.state.name}</h3></Link>
+                <Link to={detailLink}><h2>{this.state.id}: {this.state.name}</h2></Link>
             </div>
         );
     }

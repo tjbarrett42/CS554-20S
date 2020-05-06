@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { createBrowserHistory } from 'history';
 import Pokemon from './components/Pokemon';
 import PokemonDetails from "./components/PokemonDetails";
 import Berries from './components/Berries';
 import Machines from './components/Machines';
+import ErrorPage from "./components/ErrorPage";
 import Landing from './components/Landing';
-
 
 export default function App() {
     return (
@@ -28,19 +29,15 @@ export default function App() {
                     </ul>
                 </nav>
 
-
-
                 <Switch>
-
                     <Route path="/pokemon/page/:page" component={Pokemon}></Route>
                     <Route path="/pokemon/:id" component={PokemonDetails}></Route>
                     <Route path="/berries/page/0" component={Berries}></Route>
                     <Route path="/machines/page/0" component={Machines}></Route>
+                    <Route path="/404" component={ErrorPage}></Route>
                     <Route path="/" component={Landing}></Route>
-
                 </Switch>
             </div>
-
         </Router>
     );
 }
