@@ -1,10 +1,15 @@
+// 2020 Timothy Barrett
+// CS554 Web Programming II
+// I pledge my honor that I have abided by the Stevens Honor System.
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 import Pokemon from './components/Pokemon';
 import PokemonDetails from "./components/PokemonDetails";
 import Berries from './components/Berries';
+import BerryDetails from "./components/BerryDetails";
 import Machines from './components/Machines';
+import MachineDetails from './components/MachineDetails';
 import ErrorPage from "./components/ErrorPage";
 import Landing from './components/Landing';
 
@@ -32,8 +37,10 @@ export default function App() {
                 <Switch>
                     <Route path="/pokemon/page/:page" component={Pokemon}></Route>
                     <Route path="/pokemon/:id" component={PokemonDetails}></Route>
-                    <Route path="/berries/page/0" component={Berries}></Route>
-                    <Route path="/machines/page/0" component={Machines}></Route>
+                    <Route path="/berries/page/:page" component={Berries}></Route>
+                    <Route path="/berries/:id" component={BerryDetails}></Route>
+                    <Route path="/machines/page/:page" component={Machines}></Route>
+                    <Route path="/machines/:id" component={MachineDetails}></Route>
                     <Route path="/404" component={ErrorPage}></Route>
                     <Route path="/" component={Landing}></Route>
                 </Switch>

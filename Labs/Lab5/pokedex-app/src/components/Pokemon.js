@@ -41,14 +41,12 @@ class Pokemon extends Component {
     }
 
     render() {
-
         // Render 404 Error if page is negative or run out of pokemon to list
         if ((this.state.page < 0) || ((this.state.page) > (this.state.data['count'] / 20))) {
             return <Redirect to="/404" />;
         }
         return (
             // Links used to update URL - spotty solution, there has to be another way to do this
-
             // Keep HTML valid with fragments, since we are returning multiple values
             <React.Fragment>
                 <div>
@@ -63,10 +61,10 @@ class Pokemon extends Component {
                 </div>
 
                 <div className="row">
-                {this.state.data && this.state.data['results'].map(display => (
-                    <PokemonDisplay key={display.name} name={display.name} url={display.url}
-                    />
-                ))}
+                    {this.state.data && this.state.data['results'].map(display => (
+                        <PokemonDisplay key={display.name} name={display.name} url={display.url}
+                        />
+                    ))}
                 </div>
             </React.Fragment>
         );

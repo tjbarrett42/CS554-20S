@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Axios from 'axios';
 
-
 export default class PokemonDetails extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +15,7 @@ export default class PokemonDetails extends Component {
         // };
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         const { id } = this.props.match.params;
         this.setState({id: id}, () => {this.showDetails()});
         // const name = res.data.name;
@@ -60,11 +59,11 @@ export default class PokemonDetails extends Component {
         const weight = this.state.data.weight;
         const baseExperience = this.state.data.base_experience;
 
-
         return (
             <div>
+                <h1>The Pokemon Listing</h1>
                 {/* Ensure this.state.data exists*/}
-                <h2>{this.state.data && this.state.data.id}: {this.state.data.name}</h2>
+                <h2>#{this.state.data && this.state.data.id} {this.state.data.name}</h2>
                 <h3>Types:</h3>
                 <ul>
                     {typeList}
